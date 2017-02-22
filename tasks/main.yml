@@ -29,6 +29,13 @@
 - name: Put in place the library jar files from the dist directory
   command: cp -r /opt/solr-{{ solr_version }}/dist {{ solr_home }} creates={{ solr_home }}/dist
 
+- name: Put in place the slf4j library jar files to tomcat solr library
+  command: cp -rp /opt/solr-{{ solr_version }}/example/lib/ext/{{ item.file }} {{ solr_base }}/lib
+  with_items: "{{ slf4jjars }}"
+
+- name: Set correct ownership of the solr base library directory
+  file: path={{ solr_base }} owner=solr group=solr recurse=yes state=directory
+
 - name: Set correct ownership of the solr_home directory
   file: path={{ solr_home }} owner=solr group=solr recurse=yes state=directory
 
