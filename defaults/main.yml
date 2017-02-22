@@ -1,7 +1,7 @@
 ---
 
 # Define the version of Solr to use
-solr_version: 4.2.0
+solr_version: 4.10.4
 
 # Define the URL to obtain Solr
 solr_url: http://archive.apache.org/dist/lucene/solr/{{ solr_version }}/solr-{{ solr_version }}.tgz
@@ -38,3 +38,12 @@ solr_master_host: solr-master.library.ucla.edu
 # List of solr cores that use the /opt/xml_content directory
 use_xml_content_dir:
   - sheetmusic
+
+icu_url: http://central.maven.org/maven2/com/ibm/icu/icu4j/56.1/icu4j-56.1.jar
+
+slf4jjars:
+  - file: log4j-1.2.17.jar
+  - file: slf4j-api-1.7.6.jar
+  - file: jcl-over-slf4j-1.7.6.jar
+  - file: slf4j-log4j12-1.7.6.jar
+  - file: jul-to-slf4j-1.7.6.jar
