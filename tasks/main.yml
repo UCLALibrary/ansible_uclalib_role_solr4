@@ -32,7 +32,7 @@
     owner: solr
     group: solr
     state: directory
-    mode: 0644
+    mode: 0755
 
 - name: Download Analyzer ICU jar and add to all cores
   get_url:
