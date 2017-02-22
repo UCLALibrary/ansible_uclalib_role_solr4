@@ -26,6 +26,22 @@
 - name: Create the solr_home path and subdirs from the example provided in the Solr download
   command: cp -r /opt/solr-{{ solr_version }}/example/solr {{ solr_home }} creates={{ solr_home }}
 
+- name: Create solr home lib path
+  file:
+    path: "{{ solr_home }}/lib"
+    owner: solr
+    group: solr
+    state: directory
+    mode: 0644
+
+- name: Download Analyzer ICU jar and add to all cores
+  get_url:
+    url: "{{ analyzericu_url }}"
+    dest: "{{ solr_home }}/lib"
+    mode: 0644
+    owner: solr
+    group: solr
+
 - name: Put in place the library jar files from the dist directory
   command: cp -r /opt/solr-{{ solr_version }}/dist {{ solr_home }} creates={{ solr_home }}/dist
 

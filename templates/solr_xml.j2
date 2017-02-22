@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<solr persistent="true">
+<solr persistent="true" sharedLib="lib">
   <cores adminPath="/admin/cores" defaultCoreName="collection1" host="${host:}" hostPort="${jetty.port:}" hostContext="${hostContext:}" zkClientTimeout="${zkClientTimeout:15000}">
     {% for item in solr_cores %}
     <core name="{{ item.ident }}" instanceDir="{{ item.ident }}" />
