@@ -40,6 +40,7 @@ use_xml_content_dir:
   - sheetmusic
 
 analyzericu_url: http://central.maven.org/maven2/org/apache/lucene/lucene-analyzers-icu/4.10.4/lucene-analyzers-icu-4.10.4.jar
+ibmicu: http://central.maven.org/maven2/com/ibm/icu/icu4j/56.1/icu4j-56.1.jar
 
 slf4jjars:
   - file: log4j-1.2.17.jar
