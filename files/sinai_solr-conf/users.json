@@ -1,0 +1,92 @@
+[
+    {
+        "email": "ksclarke@gmail.com",
+        "is_admin": true,
+        "record_type": "user"
+    },
+    {
+        "email": "kristian.j.allen@gmail.com",
+        "is_admin": true,
+        "record_type": "user"
+    },
+    {
+        "email": "stassewright@gmail.com",
+        "is_admin": true,
+        "record_type": "user"
+    },
+    {
+        "email": "kirschbombe@gmail.com",
+        "is_admin": true,
+        "record_type": "user"
+    },
+    {
+        "email": "damian07@gmail.com",
+        "is_admin": false,
+        "record_type": "user"
+    },
+    {
+        "email": "parinita.ghorpade@gmail.com",
+        "is_admin": true,
+        "record_type": "user"
+    },
+    {
+        "email": "markamatney@gmail.com",
+        "is_admin": true,
+        "record_type": "user"
+    },
+    {
+        "email": "todd.grappone@gmail.com",
+        "is_admin": true,
+        "record_type": "user"
+    },
+    {
+        "email": "andy.rutkowski@gmail.com",
+        "is_admin": true,
+        "record_type": "user"
+    },
+    {
+        "email": "sinai.arcadia@gmail.com",
+        "is_admin": false,
+        "record_type": "user"
+    },
+    {
+        "email": "marta2abril@gmail.com",
+        "is_admin": false,
+        "record_type": "user"
+    },
+    {
+        "email": "azaroth42@gmail.com",
+        "is_admin": false,
+        "record_type": "user"
+    },
+    {
+        "email": "bustillom@gmail.com",
+        "is_admin": false,
+        "record_type": "user"
+    },
+    {
+        "email": "maja.kominko@gmail.com",
+        "is_admin": false,
+        "record_type": "user"
+    },
+    {
+        "email": "alegaeta3@gmail.com",
+        "is_admin": true,
+        "record_type": "user"
+    },
+    {
+        "email": "mphelps@emelibrary.org",
+        "is_admin": false,
+        "record_type": "user"
+    },
+    {
+        "email": "maura.nolan@gmail.com",
+        "is_admin": false,
+        "record_type": "user"
+    },
+    {
+        "email": "sinai.uclalibrary@gmail.com",
+        "is_admin": false,
+        "record_type": "user"
+    }
+]
