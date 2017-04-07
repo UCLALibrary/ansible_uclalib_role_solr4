@@ -5,26 +5,43 @@
   register: solr_path
 
 - name: Download Solr
-  get_url: url={{ solr_url }} dest=/opt/solr-{{ solr_version }}.tgz
+  get_url:
+    url: "{{ solr_url }}"
+    dest: "/opt/solr-{{ solr_version }}.tgz"
   when: solr_path.stat.exists == False
 
 - name: Unpack Solr
-  unarchive: src=/opt/solr-{{ solr_version }}.tgz dest=/opt copy=no
+  unarchive:
+    src: "/opt/solr-{{ solr_version }}.tgz"
+    dest: "/opt"
+    copy: "no"
   when: solr_path.stat.exists == False
 
 - name: Create the xml_content directory in /opt
-  file: path=/opt/xml_content/{{ item.ident }}/mods owner=solr group=solr state=directory
+  file:
+    path: "/opt/xml_content/{{ item.ident }}/mods"
+    owner: "solr"
+    group: "solr"
+    state: "directory"
   with_items: "{{ solr_cores }}"
   when: item.type in use_xml_content_dir
 
 - name: Put in place the solr.war file
-  command: cp /opt/solr-{{ solr_version }}/dist/solr-{{ solr_version }}.war {{ solr_base }}/webapps/solr.war creates={{ solr_base }}/webapps/solr.war
+  command: >
+    cp /opt/solr-{{ solr_version }}/dist/solr-{{ solr_version }}.war
+    {{ solr_base }}/webapps/solr.war creates={{ solr_base }}/webapps/solr.war
 
 - name: Set correct ownership of the solr.war file
-  file: path={{ solr_base }}/webapps/solr.war owner=solr group=solr state=file
+  file:
+    path: "{{ solr_base }}/webapps/solr.war"
+    owner: "solr"
+    group: "solr"
+    state: "file"
 
 - name: Create the solr_home path and subdirs from the example provided in the Solr download
-  command: cp -r /opt/solr-{{ solr_version }}/example/solr {{ solr_home }} creates={{ solr_home }}
+  command: >
+    cp -r /opt/solr-{{ solr_version }}/example/solr {{ solr_home }}
+    creates={{ solr_home }}
 
 - name: Create solr home lib path
   file:
@@ -51,37 +68,72 @@
     group: solr
 
 - name: Put in place the library jar files from the dist directory
-  command: cp -r /opt/solr-{{ solr_version }}/dist {{ solr_home }} creates={{ solr_home }}/dist
+  command: >
+    cp -r /opt/solr-{{ solr_version }}/dist {{ solr_home }}
+    creates={{ solr_home }}/dist
 
 - name: Put in place the slf4j library jar files to tomcat solr library
-  command: cp -rp /opt/solr-{{ solr_version }}/example/lib/ext/{{ item.file }} {{ solr_base }}/lib
+  command: >
+    cp -rp /opt/solr-{{ solr_version }}/example/lib/ext/{{ item.file }}
+    {{ solr_base }}/lib
   with_items: "{{ slf4jjars }}"
 
 - name: Set correct ownership of the solr base library directory
-  file: path={{ solr_base }} owner=solr group=solr recurse=yes state=directory
+  file:
+    path: "{{ solr_base }}"
+    owner: "solr"
+    group: "solr"
+    recurse: "yes"
+    state: "directory"
 
 - name: Set correct ownership of the solr_home directory
-  file: path={{ solr_home }} owner=solr group=solr recurse=yes state=directory
+  file:
+    path: "{{ solr_home }}"
+    owner: "solr"
+    group: "solr"
+    recurse: "yes"
+    state: "directory"
 
 - name: Put in place the Solr XML file defining the number of cores
-  template: src=solr_xml.j2 dest={{ solr_home }}/solr.xml owner=solr group=solr backup=yes
+  template:
+    src: "solr_xml.j2"
+    dest: "{{ solr_home }}/solr.xml"
+    owner: "solr"
+    group: "solr"
+    backup: "yes"
 
 - name: Create the Solr core directory paths
-  command: cp -r /opt/solr-{{ solr_version }}/example/solr/collection1 {{ solr_home }}/{{ item.ident }} creates={{ solr_home }}/{{ item.ident }}
+  command: >
+    cp -r /opt/solr-{{ solr_version }}/example/solr/collection1
+    {{ solr_home }}/{{ item.ident }}
+    creates={{ solr_home }}/{{ item.ident }}
   with_items: "{{ solr_cores }}"
 
 - name: Put in place any application-specifc solr core configuration files
-  copy: src={{ item.type }}_solr-conf/ dest={{ solr_home }}/{{ item.ident }}/conf
+  copy:
+    src: "{{ item.type }}_solr-conf/"
+    dest: "{{ solr_home }}/{{ item.ident }}/conf"
   with_items: "{{ solr_cores }}"
   when: item.type != "default"
 
 - name: Put in place customized solrconfig.xml file for each core
-  template: src=solrconfig_{{ item.type }}.j2 dest={{ solr_home }}/{{ item.ident }}/conf/solrconfig.xml
+  template:
+    src: "solrconfig_{{ item.type }}.j2"
+    dest: "{{ solr_home }}/{{ item.ident }}/conf/solrconfig.xml"
   with_items: "{{ solr_cores }}"
 
 - name: Set correct ownership of the solr cores directories
-  file: path={{ solr_home }}/{{ item.ident }} owner=solr group=solr recurse=yes state=directory
+  file:
+    path: "{{ solr_home }}/{{ item.ident }}"
+    owner: "solr"
+    group: "solr"
+    recurse: "yes"
+    state: "directory"
   with_items: "{{ solr_cores }}"
 
 - name: Put in place the Solr Environment variables file
-  template: src=solr_env.j2 dest=/etc/sysconfig/solr owner=root group=root
+  template:
+    src: "solr_env.j2"
+    dest: "/etc/sysconfig/solr"
+    owner: "root"
+    group: "root"
