@@ -1,0 +1,39 @@
+<dataConfig>
+  <dataSource name="myfilereader" type="FileDataSource" encoding="UTF-8"/>
+  <document>
+    <entity name="f" rootEntity="false" dataSource="null" processor="FileListEntityProcessor" fileName=".*xml" recursive="true" baseDir="/Users/pghorpade/solr-4.2.0_2/prrla/dc/${dataimporter.request.instkey}/${dataimporter.request.colkey}">
+      <entity name="x" dataSource="myfilereader" processor="XPathEntityProcessor" url="${f.fileAbsolutePath}" stream="false" forEach="/dc" transformer="TemplateTransformer"
+        logTemplate="     processing ${f.fileAbsolutePath}" logLevel="info">
+        <field column="id" template="${f.file}"/>
+        <field column="thumbnailExists" template="false"/>
+        <field column="collectionKey" template="${dataimporter.request.colkey}"/>
+        <field column="collectionName" template="${dataimporter.request.colname}"/>
+        <field column="institutionKey" template="${dataimporter.request.instkey}"/>
+        <field column="institutionName" template="${dataimporter.request.instname}"/>
+        <field column="fileAbsolutePath" template="${f.fileAbsolutePath}"/>
+        <field column="fileName" template="${f.file}"/>
+        <field column="fileSize" template="${f.fileSize}"/>
+        <field column="fileLastModified" template="${f.fileLastModified}"/>
+        <field column="title_keyword" xpath="/dc/title"/>
+        <field column="creator_keyword" xpath="/dc/creator"/>
+        <field column="subject_keyword" xpath="/dc/subject"/>
+        <field column="description_keyword" xpath="/dc/description"/>
+        <field column="publisher_keyword" xpath="/dc/publisher"/>
+        <field column="contributor_keyword" xpath="/dc/contributor"/>
+        <field column="date_keyword" xpath="/dc/date"/>
+        <field column="type_keyword" xpath="/dc/type"/>
+        <field column="format_keyword" xpath="/dc/format"/>
+        <field column="identifier_keyword" xpath="/dc/identifier"/>
+        <field column="source_keyword" xpath="/dc/source"/>
+        <field column="language_keyword" xpath="/dc/language"/>
+        <field column="relation_keyword" xpath="/dc/relation"/>
+        <field column="coverage_keyword" xpath="/dc/coverage"/>
+        <field column="rights_keyword" xpath="/dc/rights"/>
+<!--<field column="first_title" xpath="/dc/title"/>
+<field column="decade" xpath="/dc/date"/> -->
+    <field column="thumbnail_url" xpath="/dc/identifier.thumbnail"/>
+      </entity>
+
+    </entity>
+  </document>
+</dataConfig>
