@@ -1,7 +1,7 @@
 <dataConfig>
   <dataSource name="myfilereader" type="FileDataSource" encoding="UTF-8"/>
   <document>
-    <entity name="f" rootEntity="false" dataSource="null" processor="FileListEntityProcessor" fileName=".*xml" recursive="true" baseDir="/Users/pghorpade/solr-4.2.0_2/prrla/dc/${dataimporter.request.instkey}/${dataimporter.request.colkey}">
+    <entity name="f" rootEntity="false" dataSource="null" processor="FileListEntityProcessor" fileName=".*xml" recursive="true" baseDir="/opt/xml_content/prrla/dc/${dataimporter.request.instkey}/${dataimporter.request.colkey}">
       <entity name="x" dataSource="myfilereader" processor="XPathEntityProcessor" url="${f.fileAbsolutePath}" stream="false" forEach="/dc" transformer="TemplateTransformer"
         logTemplate="     processing ${f.fileAbsolutePath}" logLevel="info">
         <field column="id" template="${f.file}"/>
