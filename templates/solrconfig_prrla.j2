@@ -847,7 +847,8 @@
      <lst name="defaults">
        <str name="echoParams">explicit</str>
        <int name="rows">10</int>
-       <str name="df">text</str>
+       <!--<str name="df">text</str>-->
+       <str name="df">text_multi</str>
      </lst>
     <!-- In addition to defaults, "appends" params can be specified
          to identify values which should be appended to the list of
@@ -1245,59 +1246,43 @@
        https://wiki.apache.org/solr/SolrCloud/
     -->
   <requestHandler name="/replication" class="solr.ReplicationHandler" >
-{% if solr_instance_type == 0 %}
-    <!--
-       <lst name="master">
-         <str name="replicateAfter">commit</str>
-         <str name="replicateAfter">startup</str>
-         <str name="confFiles">schema.xml,stopwords.txt</str>
-       </lst>
-    -->
-    <!--
-       <lst name="slave">
-         <str name="masterUrl">http://your-master-hostname:8983/solr</str>
-         <str name="pollInterval">00:00:60</str>
-       </lst>
-    -->
-{%  endif %}
-{% if solr_instance_type == 1 %}
-    <lst name="master">
-         <str name="replicateAfter">commit</str>
-         <str name="replicateAfter">startup</str>
-         <str name="backupAfter">optimize</str>
-         <str name="confFiles">schema.xml,stopwords.txt</str>
-    </lst>
-    <int name="maxNumberOfBackups">2</int>
-{% endif %}
-{% if solr_instance_type == 2 %}
-    <lst name="slave">
-      <str name="masterUrl">http://{{ solr_master_host }}/solr/{{ item.ident }}/replication</str>
-      <str name="pollInterval">00:00:30</str>
-    </lst>
-{% endif %}
-  </requestHandler>
-
-<!--  <requestHandler name="/replication" class="solr.ReplicationHandler" > -->
     <!--
        To enable simple master/slave replication, uncomment one of the
        sections below, depending on whether this solr instance should be
        the "master" or a "slave".  If this instance is a "slave" you will
        also need to fill in the masterUrl to point to a real machine.
     -->
-    <!--
-       <lst name="master">
-         <str name="replicateAfter">commit</str>
-         <str name="replicateAfter">startup</str>
-         <str name="confFiles">schema.xml,stopwords.txt</str>
-       </lst>
-    -->
-    <!--
-       <lst name="slave">
-         <str name="masterUrl">http://your-master-hostname:8983/solr</str>
-         <str name="pollInterval">00:00:60</str>
-       </lst>
-    -->
-<!--  </requestHandler> -->
+ {% if solr_instance_type == 0 %}
+     <!--
+        <lst name="master">
+          <str name="replicateAfter">commit</str>
+          <str name="replicateAfter">startup</str>
+          <str name="confFiles">schema.xml,stopwords.txt</str>
+        </lst>
+     -->
+     <!--
+        <lst name="slave">
+          <str name="masterUrl">http://your-master-hostname:8983/solr</str>
+          <str name="pollInterval">00:00:60</str>
+        </lst>
+     -->
+ {%  endif %}
+ {% if solr_instance_type == 1 %}
+     <lst name="master">
+          <str name="replicateAfter">commit</str>
+          <str name="replicateAfter">startup</str>
+          <str name="backupAfter">optimize</str>
+          <str name="confFiles">schema.xml,stopwords.txt</str>
+     </lst>
+     <int name="maxNumberOfBackups">2</int>
+ {% endif %}
+ {% if solr_instance_type == 2 %}
+     <lst name="slave">
+       <str name="masterUrl">http://{{ solr_master_host }}/solr/{{ item.ident }}/replication</str>
+       <str name="pollInterval">00:00:30</str>
+     </lst>
+ {% endif %}
+  </requestHandler>
 
   <requestHandler name="/dataimport" class="org.apache.solr.handler.dataimport.DataImportHandler">
     <lst name="defaults">
@@ -1803,9 +1788,14 @@
        <str name="dest">decade</str>
      </processor>
 
+       <processor class="solr.CloneFieldUpdateProcessorFactory">
+       <str name="source">date_keyword</str>
+       <str name="dest">sort_decade</str>
+     </processor>
+
        <processor class="solr.processor.FirstFieldValueUpdateProcessorFactory">
 
-         <str name="fieldName">decade</str>
+         <str name="fieldName">sort_decade</str>
 
        </processor>
        <processor class="solr.LogUpdateProcessorFactory" />
