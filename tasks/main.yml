@@ -51,22 +51,6 @@
     state: directory
     mode: 0755
 
-- name: Download Analyzer ICU jar and add to all cores
-  get_url:
-    url: "{{ analyzericu_url }}"
-    dest: "{{ solr_home }}/lib"
-    mode: 0644
-    owner: solr
-    group: solr
-
-- name: Download IBM ICU jar and add to all cores
-  get_url:
-    url: "{{ ibmicu }}"
-    dest: "{{ solr_home }}/lib"
-    mode: 0644
-    owner: solr
-    group: solr
-
 - name: Put in place the library jar files from the dist directory
   command: >
     cp -r /opt/solr-{{ solr_version }}/dist {{ solr_home }}

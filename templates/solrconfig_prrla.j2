@@ -87,9 +87,11 @@
   <lib dir="${solr.install.dir:../../..}/contrib/langid/lib/" regex=".*\.jar" />
   <lib dir="${solr.install.dir:../../..}/dist/" regex="solr-langid-\d.*\.jar" />
 
+-->
+
   <lib dir="${solr.install.dir:../../..}/contrib/velocity/lib" regex=".*\.jar" />
   <lib dir="${solr.install.dir:../../..}/dist/" regex="solr-velocity-\d.*\.jar" />
--->
+
 
   <!-- an exact 'path' can be used instead of a 'dir' to specify a
        specific jar file.  This will cause a serious error to be logged
@@ -981,7 +983,7 @@
           text^0.5 features^1.0 name^1.2 sku^1.5 id^10.0 manu^1.1 cat^1.4
           title^10.0 description^5.0 keywords^5.0 author^2.0 resourcename^1.0
        </str>
-       <str name="df">text</str>
+       <str name="df">text_multi</str>
        <str name="mm">100%</str>
        <str name="q.alt">*:*</str>
        <str name="rows">10</str>
@@ -997,14 +999,15 @@
        <!-- Faceting defaults -->
        <str name="facet">on</str>
        <str name="facet.missing">true</str>
-       <str name="facet.field">cat</str>
-       <str name="facet.field">manu_exact</str>
-       <str name="facet.field">content_type</str>
-       <str name="facet.field">author_s</str>
-       <str name="facet.query">ipod</str>
-       <str name="facet.query">GB</str>
+       <str name="facet.field">institutionName</str>
+       <str name="facet.field">collectionName</str>
+       <str name="facet.field">type_keyword</str>
+       <str name="facet.field">creator_keyword</str>
+       <str name="facet.field">decade</str>
+      <!-- <str name="facet.query">ipod</str>
+       <str name="facet.query">GB</str> -->
        <str name="facet.mincount">1</str>
-       <str name="facet.pivot">cat,inStock</str>
+      <!-- <str name="facet.pivot">cat,inStock</str>
        <str name="facet.range.other">after</str>
        <str name="facet.range">price</str>
        <int name="f.price.facet.range.start">0</int>
@@ -1019,7 +1022,7 @@
        <str name="f.manufacturedate_dt.facet.range.end">NOW</str>
        <str name="f.manufacturedate_dt.facet.range.gap">+1YEAR</str>
        <str name="f.manufacturedate_dt.facet.range.other">before</str>
-       <str name="f.manufacturedate_dt.facet.range.other">after</str>
+       <str name="f.manufacturedate_dt.facet.range.other">after</str> -->
 
        <!-- Highlighting defaults -->
        <str name="hl">on</str>
