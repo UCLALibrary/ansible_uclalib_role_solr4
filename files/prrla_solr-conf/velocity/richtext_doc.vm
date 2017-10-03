@@ -9,8 +9,8 @@
 ## * mimeExtensionsMap, AKA extMap
 
 ## Title
-#if($doc.getFieldValue('title'))
-  #set($title = $esc.html($doc.getFirstValue('title')))
+#if($doc.getFieldValue('title_keyword'))
+  #set($title = $esc.html($doc.getFirstValue('title_keyword')))
 #else
   #set($title = "["+$doc.getFieldValue('id')+"]")
 #end
@@ -53,19 +53,21 @@
 <div class="result-title">
   ## Icon
   ## Small file type icons from http://www.splitbrain.org/projects/file_icons (public domain)
-  <img src="#{url_root}/img/filetypes/${filetype}.png" align="center">
+   #if($doc.getFieldValue('thumbnail_url'))
+      <img src="#field('thumbnail_url')" align="center">
+   #end
 
   ## Title, hyperlinked
-  <a href="${url}" target="_blank">
+  <a href='http://test-solr.library.ucla.edu/solr/prrla/select?q=id:"${url}"' target="_blank">
     <b>$title</b></a>
 
   ## Link for MLT / More Like This / Find Similar
-  <span class="mlt">
-    #if($params.getBool('mlt', false) == false)
+  <!--<span class="mlt">
+    ##if($params.getBool('mlt', false) == false)
       <a href="#lensNoQ&q=id:%22$docId%22&mlt=true">
         More Like This</a>
-    #end
-  </span>
+    ##end
+  </span> -->
 
 </div>
 
@@ -74,10 +76,16 @@
   Id: #field('id')
 </div>
 
-## Resource Name
+## Title
 <div>
-  #if($doc.getFieldValue('resourcename'))
-    Resource name: $filename 
+  #if($doc.getFieldValue('title_keyword'))
+  #set($titles = $doc.getFieldValue('title_keyword'))
+  <b>Title</b>:<div>
+  #foreach($title_field in $titles)
+      $title_field <br/>
+     ##field('title_keyword')
+  #end
+  </div>
   #elseif($url)
     URL: $url
   #end
@@ -87,19 +95,260 @@
 </div>
 
 ## Author
-#if($doc.getFieldValue('author'))
+#if($doc.getFieldValue('creator_keyword'))
   <div>
-    Author: #field('author')
+  #set($authors = $doc.getFieldValue('creator_keyword'))
+    <b>Author</b>: ##field('creator_keyword')
+    <div>
+    #foreach($author in $authors)
+      $author <br/>
+    #end
+    </div>
   </div>
 #end
 
-## Last_Modified Date
-#if($doc.getFieldValue('last_modified'))
+## Date
+#if($doc.getFieldValue('date_keyword'))
   <div>
-    last-modified:
-    #field('last_modified')
+  #set($dates = $doc.getFieldValue('date_keyword'))
+    <b>Date</b>:
+    <div>
+    ##field('date_keyword')
+    #foreach($date in $dates)
+     $date <br/>
+    #end
+    </div>
   </div>
 #end
+
+## Identifier
+#if($doc.getFieldValue('identifier_keyword'))
+  <div>
+  #set($identifiers = $doc.getFieldValue('identifier_keyword'))
+    <b>Identifier</b>:
+    <div>
+    ##field('identifier_keyword')
+    #foreach($identifier in $identifiers)
+     $identifier <br/>
+    #end
+  </div>
+  </div>
+#end
+
+## Subject
+#if($doc.getFieldValue('subject_keyword'))
+<div>
+  #set($subjects = $doc.getFieldValue('subject_keyword'))
+    <b>Subject</b>:
+    <div>
+    ##field('subject_keyword')
+    #foreach($subject in $subjects)
+     $subject <br/>
+    #end
+  </div>
+  </div>
+#end
+
+
+## Contributor
+#if($doc.getFieldValue('contributor_keyword'))
+<div>
+  #set($contributors = $doc.getFieldValue('contributor_keyword'))
+    <b>Contributor</b>:
+    <div>
+    ##field('contributor_keyword')
+    #foreach($contributor in $contributors)
+     $contributor <br/>
+    #end
+  </div>
+  </div>
+#end
+
+## Publisher
+#if($doc.getFieldValue('publisher_keyword'))
+<div>
+  #set($publishers = $doc.getFieldValue('publisher_keyword'))
+    <b>Publisher</b>:
+    <div>
+    ##field('publisher_keyword')
+    #foreach($publisher in $publishers)
+     $publisher <br/>
+    #end
+  </div>
+  </div>
+#end
+
+
+## Coverage
+#if($doc.getFieldValue('coverage_keyword'))
+<div>
+  #set($coverages = $doc.getFieldValue('coverage_keyword'))
+    <b>Coverage</b>:
+    <div>
+    ##field('coverage_keyword')
+    #foreach($coverage in $coverages)
+     $coverage <br/>
+    #end
+  </div>
+  </div>
+#end
+
+
+## Type
+#if($doc.getFieldValue('type_keyword'))
+<div>
+  #set($types = $doc.getFieldValue('type_keyword'))
+    <b>Type</b>:
+    <div>
+    ##field('type_keyword')
+    #foreach($type in $types)
+     $type <br/>
+    #end
+  </div>
+  </div>
+#end
+
+
+## Source
+#if($doc.getFieldValue('source_keyword'))
+<div>
+  #set($sources = $doc.getFieldValue('source_keyword'))
+    <b>Source</b>:
+    <div>
+    ##field('source_keyword')
+    #foreach($source in $sources)
+     $source <br/>
+    #end
+  </div>
+  </div>
+#end
+
+
+## Relation
+#if($doc.getFieldValue('relation_keyword'))
+<div>
+  #set($relations = $doc.getFieldValue('relation_keyword'))
+    <b>Relation</b>:
+    <div>
+    ##field('relation_keyword')
+    #foreach($relation in $relations)
+     $relation <br/>
+    #end
+  </div>
+  </div>
+#end
+
+
+## Format
+#if($doc.getFieldValue('format_keyword'))
+<div>
+  #set($formats = $doc.getFieldValue('format_keyword'))
+    <b>Format</b>:
+    <div>
+    ##field('format_keyword')
+    #foreach($format in $formats)
+     $format <br/>
+    #end
+  </div>
+  </div>
+#end
+
+
+## Language
+#if($doc.getFieldValue('language_keyword'))
+<div>
+  #set($languages = $doc.getFieldValue('language_keyword'))
+    <b>Language</b>:
+    <div>
+    ##field('language_keyword')
+    #foreach($language in $languages)
+     $language <br/>
+    #end
+  </div>
+  </div>
+#end
+
+
+## Description
+#if($doc.getFieldValue('description_keyword'))
+<div>
+  #set($descriptions = $doc.getFieldValue('description_keyword'))
+    <b>Abstract</b>:
+    <div>
+    ##field('description_keyword')
+    #foreach($description in $descriptions)
+     $description <br/>
+    #end
+  </div>
+  </div>
+#end
+
+
+
+## Rights
+#if($doc.getFieldValue('rights_keyword'))
+<div>
+  #set($rights = $doc.getFieldValue('rights_keyword'))
+    <b>Rights</b>:
+    <div>
+    ##field('rights_keyword')
+    #foreach($right in $rights)
+     $right <br/>
+    #end
+  </div>
+  </div>
+#end
+
+
+
+##  Institution
+#if($doc.getFieldValue('institutionName'))
+  <div>
+    <b>Institution</b>:
+    #field('institutionName')
+  </div>
+#end
+
+## Collection
+#if($doc.getFieldValue('collectionName'))
+  <div>
+    <b>Collection</b>:
+    #field('collectionName')
+  </div>
+#end
+
+## First_title
+#if($doc.getFieldValue('first_title'))
+  <div>
+    Sort Title:
+    #field('first_title')
+  </div>
+#end
+
+## Decade
+#if($doc.getFieldValue('decade'))
+<div>
+  #set($decades = $doc.getFieldValue('decade'))
+    <b>Decade</b>:
+    <div>
+    ##field('decade')
+    #foreach($decade in $decades)
+     $decade <br/>
+    #end
+  </div>
+  </div>
+#end
+
+
+## sort Decade
+#if($doc.getFieldValue('sort_decade'))
+  <div>
+    Sort Decade:
+    #field('sort_decade')
+  </div>
+#end
+
+
 
 ## Main content of doc
 <div class="result-body">

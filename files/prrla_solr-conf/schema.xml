@@ -156,7 +156,11 @@
    <field name="content_type" type="string" indexed="true" stored="true" multiValued="true"/>
    <field name="last_modified" type="date" indexed="true" stored="true"/>
    <field name="links" type="string" indexed="true" stored="true" multiValued="true"/>
-   <!-- prrla non DC fields start-->
+  <!--prrla jira ticket PRRLA-50 -->
+   <field name="external_link" type="string" indexed="true" stored="true" multiValued="false"/>
+
+   <field name="alternate_external_link" type="string" indexed="true" stored="true" multiValued="true"/>
+<!-- prrla non DC fields start-->
 
     <field name="sort_decade" type="string" indexed="true" stored="true" multiValued="false"/>
 <field name="decade" type="string" indexed="true" stored="true" multiValued="true"/>

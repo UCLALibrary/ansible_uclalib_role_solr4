@@ -27,24 +27,24 @@
 
   ## GEO-Spatial / Location Based
   #set( $selected = ($queryOpts == "spatial") )
-  <span class="tab #if($selected)selected#end">
+  <!--<span class="tab #if($selected)selected#end">
     #if($selected)
       Spatial
     #else
       <a href="#url_for_home?&queryOpts=spatial#debug#annotate">
         Spatial</a>
     #end
-  </span>
+  </span>-->
 
   ## Group By Field
   #set( $selected = ($queryOpts == "group") )
-  <span class="tab #if($selected)selected#end">
+  <!--<span class="tab #if($selected)selected#end">
     #if($selected)
       Group By
     #else
       <a href="#url_for_home?#debug#annotate&queryOpts=group&group=true&group.field=manu_exact">
         Group By</a>
     #end
-  </span>
+  </span>-->
 
 </div>
