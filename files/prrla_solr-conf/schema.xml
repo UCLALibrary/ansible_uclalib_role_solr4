@@ -185,7 +185,8 @@
 
    <field name="prrla_member_longitude" type="string" indexed="true" stored="true" />
 
-   <field name="collectionName" type="prrla_facet" indexed="true" stored="true" />
+   <field name="collectionName" type="prrla_facet" indexed="true" stored="true" multiValued="true" />
+   <field name="collectionKey" type="string" indexed="true" stored="true" multiValued="true" />
 
    <field name="institutionName" type="prrla_facet" indexed="true" stored="true" />
 
