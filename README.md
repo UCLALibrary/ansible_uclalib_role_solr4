@@ -1,3 +1,5 @@
+# This role is archived and obsolete - use https://github.com/UCLALibrary/uclalib_role_solr instead.
+
 # UCLALib Ansible Role: Solr
 
 Deploys Apache Solr on RHEL servers
